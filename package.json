@@ -1,0 +1,26 @@
+{
+  "name": "vuepress-plugin-versioning",
+  "version": "4.5.0",
+  "description": "Versioning plugin for VuePress",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vuepress",
+    "titanium",
+    "versioning",
+    "version"
+  ],
+  "author": "Axway Appcelerator",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/appcelerator/docs-devkit.git",
+    "directory": "packages/vuepress/vuepress-plugin-versioning"
+  },
+  "dependencies": {
+    "@vuepress/shared-utils": "^1.5.2",
+    "fs-extra": "^8.1.0"
+  }
+}
