@@ -45,18 +45,23 @@ module.exports = (options, context) => {
       // 将所有版本设置存入 themeConfig.versionedSidebar
       const currentVersion = versions[0];
       context.themeConfig.versionedSidebar = {};
+
+      context.themeConfig.sidebar = context.themeConfig.sidebar || {};
+      context.themeConfig.locale = context.themeConfig.locale || {};
       context.themeConfig.nextSidebar = {
-        sidebar: context.themeConfig.sidebar,
-        locale: context.themeConfig.locale,
+        sidebar: JSON.parse(JSON.stringify(context.themeConfig.sidebar)),
+        locale: JSON.parse(JSON.stringify(context.themeConfig.locale)),
       };
 
       // 更新当前设置
       const sidebarConfig = {
-        sidebar: JSON.parse(JSON.stringify(context.themeConfig.sidebar || {})),
-        locale: JSON.parse(JSON.stringify(context.themeConfig.locale || {})),
+        sidebar: JSON.parse(JSON.stringify(context.themeConfig.sidebar)),
+        locale: JSON.parse(JSON.stringify(context.themeConfig.locale)),
       };
       updateSidebarConfig(sidebarConfig, "next");
       context.themeConfig.versionedSidebar.next = sidebarConfig;
+      Object.assign(context.themeConfig.sidebar, sidebarConfig.sidebar || {});
+      Object.assign(context.themeConfig.locale, sidebarConfig.locale || {});
 
       // 更新存档版本设置
       for (const version of versions) {
@@ -72,14 +77,13 @@ module.exports = (options, context) => {
           fs.readFileSync(versionSidebarConfigPath).toString()
         );
 
-        // 当前版本则更新全局配置
-        if (version === currentVersion) {
-          context.themeConfig.sidebar = sidebarConfig.sidebar;
-          context.themeConfig.locale = sidebarConfig.locale;
-        } else {
+        // 非当前版本更新路径
+        if (version !== currentVersion) {
           updateSidebarConfig(sidebarConfig, version);
         }
         context.themeConfig.versionedSidebar[version] = sidebarConfig;
+        Object.assign(context.themeConfig.sidebar, sidebarConfig.sidebar || {});
+        Object.assign(context.themeConfig.locale, sidebarConfig.locale || {});
       }
     },
 
