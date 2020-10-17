@@ -46,14 +46,12 @@ module.exports = (options, context) => {
       const currentVersion = versions[0];
       context.themeConfig.versionedSidebar = {};
 
-      console.log(context.themeConfig);
       context.themeConfig.sidebar = context.themeConfig.sidebar || {};
       context.themeConfig.locales = context.themeConfig.locales || {};
       context.themeConfig.nextSidebar = {
         sidebar: JSON.parse(JSON.stringify(context.themeConfig.sidebar)),
         locales: JSON.parse(JSON.stringify(context.themeConfig.locales)),
       };
-      console.log(context.themeConfig);
 
       // 更新当前设置
       const sidebarConfig = {
