@@ -46,22 +46,24 @@ module.exports = (options, context) => {
       const currentVersion = versions[0];
       context.themeConfig.versionedSidebar = {};
 
+      console.log(context.themeConfig);
       context.themeConfig.sidebar = context.themeConfig.sidebar || {};
-      context.themeConfig.locale = context.themeConfig.locale || {};
+      context.themeConfig.locales = context.themeConfig.locales || {};
       context.themeConfig.nextSidebar = {
         sidebar: JSON.parse(JSON.stringify(context.themeConfig.sidebar)),
-        locale: JSON.parse(JSON.stringify(context.themeConfig.locale)),
+        locales: JSON.parse(JSON.stringify(context.themeConfig.locales)),
       };
+      console.log(context.themeConfig);
 
       // 更新当前设置
       const sidebarConfig = {
         sidebar: JSON.parse(JSON.stringify(context.themeConfig.sidebar)),
-        locale: JSON.parse(JSON.stringify(context.themeConfig.locale)),
+        locales: JSON.parse(JSON.stringify(context.themeConfig.locales)),
       };
       updateSidebarConfig(sidebarConfig, "next");
       context.themeConfig.versionedSidebar.next = sidebarConfig;
       Object.assign(context.themeConfig.sidebar, sidebarConfig.sidebar || {});
-      Object.assign(context.themeConfig.locale, sidebarConfig.locale || {});
+      Object.assign(context.themeConfig.locales, sidebarConfig.locales || {});
 
       // 更新存档版本设置
       for (const version of versions) {
@@ -83,7 +85,7 @@ module.exports = (options, context) => {
         }
         context.themeConfig.versionedSidebar[version] = sidebarConfig;
         Object.assign(context.themeConfig.sidebar, sidebarConfig.sidebar || {});
-        Object.assign(context.themeConfig.locale, sidebarConfig.locale || {});
+        Object.assign(context.themeConfig.locales, sidebarConfig.locales || {});
       }
     },
 
